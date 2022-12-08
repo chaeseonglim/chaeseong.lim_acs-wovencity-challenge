@@ -1,6 +1,8 @@
 #ifndef CHLLANGE_LOCK_SYNC_OBJECT_HPP_
 #define CHLLANGE_LOCK_SYNC_OBJECT_HPP_
 
+namespace Challenge {
+
 // A base class that implement syncObjects for concurrent programming.
 // Inherited classes will be used along with Lock.
 class SyncObject
@@ -13,5 +15,7 @@ private:
     // void lock();
     // void unlock();
 };
+
+}; // namespace Challenge
 
 #endif // CHLLANGE_LOCK_SYNC_OBJECT_HPP_

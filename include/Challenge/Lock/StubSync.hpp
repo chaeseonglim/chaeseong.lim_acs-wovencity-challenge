@@ -3,6 +3,8 @@
 
 #include <Challenge/Lock/SyncObject.hpp>
 
+namespace Challenge {
+
 // A class that has a stub implementation of SyncObject
 class StubSync final : public SyncObject
 {
@@ -12,5 +14,7 @@ public:
     void lock() { /* stub */ }
     void unlock() { /* stub */ }
 };
+
+}; // namespace Challenge
 
 #endif // CHLLANGE_LOCK_STUB_SYNC_HPP_

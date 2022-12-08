@@ -60,6 +60,6 @@ Lock<T>::~Lock()
     _sync.unlock();
 }
 
-};
+}; // namespace Challenge
 
 #endif // CHLLANGE_LOCK_LOCK_HPP_
