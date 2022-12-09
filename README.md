@@ -116,10 +116,10 @@ do {
 ### API
 
 Please refer to the following header files.
-[Lock.hpp](include/Challenge/Lock/Lock.hpp) - Lock class definition
-[ProdSync.hpp](include/Challenge/Lock/ProdSync.hpp) - ProdSync definition
-[PetersonSync.hpp](include/Challenge/Lock/PetersonSync.hpp) - PetersonSync definition
-[TestSetSync.hpp](include/Challenge/Lock/TestSetSync.hpp) - TestSetSync definition
+- [Lock.hpp](include/Challenge/Lock/Lock.hpp) - Lock which defines the main APIs.
+- [ProdSync.hpp](include/Challenge/Lock/ProdSync.hpp) - ProdSync which implements the given algorithm.
+- [PetersonSync.hpp](include/Challenge/Lock/PetersonSync.hpp) - PetersonSync which implements Peterson algorithm.
+- [TestSetSync.hpp](include/Challenge/Lock/TestSetSync.hpp) - TestSetSync which implements bounded waiting test-set algorithm.
 
 Here's an example code.
 
