@@ -204,7 +204,7 @@ $ make&&make install
 This submission provides a test binary called **test_lock** to provide tests on various concurrent programming algorithms.
 The binary detects failures of concurrent algorithms running on multiple threads and returns the result on console.
 
-Here are commands to run tests.
+Following sections show example commands to run tests and expected results from tests.
 
 #### Given algorithm
 
