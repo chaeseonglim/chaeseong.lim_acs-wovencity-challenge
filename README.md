@@ -188,7 +188,7 @@ brew install cmake
 brew install gtest
 ```
 
-#### Build
+#### Build & Install
 
 Run following commands at the top directory of your repo.
 ```bash
@@ -201,8 +201,10 @@ $ make&&make install
 
 ### How to test
 
-The submission provides a test binary to run tests on various synchronous algorithms.
-The binary runs a specific check logic to detect failures of algorithms running on multiple threads.
+This submission provides a test binary called **test_lock** to provide tests on various concurrent programming algorithms.
+The binary detects failures of concurrent algorithms running on multiple threads and returns the result on console.
+
+Here are commands to run tests.
 
 #### Given algorithm
 
