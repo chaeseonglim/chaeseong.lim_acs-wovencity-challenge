@@ -115,6 +115,12 @@ do {
 
 ### API
 
+Please refer to the following header files.
+[Lock.hpp](include/Challenge/Lock/Lock.hpp) - Lock class definition
+[ProdSync.hpp](include/Challenge/Lock/ProdSync.hpp) - ProdSync definition
+[PetersonSync.hpp](include/Challenge/Lock/PetersonSync.hpp) - PetersonSync definition
+[TestSetSync.hpp](include/Challenge/Lock/TestSetSync.hpp) - TestSetSync definition
+
 Here's an example code.
 
 ```C++
