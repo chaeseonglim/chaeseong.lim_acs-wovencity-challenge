@@ -5,14 +5,12 @@
 namespace Challenge {
 
 // A singleton class that contains the global variables for PetersonSync.
-// DISCLAIMER: I decided to use singleton pattern though not a big fan of it because
-// I wanted to keep APIs and the code rather simple in this challange.
 class PetersonSyncStore
 {
 public:
     static PetersonSyncStore& GetInstance()
     {
-        // Thread safety guranteed since C++11
+        // Thread safety guaranteed since C++11
         static PetersonSyncStore inst;
         return inst;
     }

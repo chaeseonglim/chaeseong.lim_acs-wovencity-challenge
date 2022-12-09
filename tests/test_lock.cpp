@@ -12,14 +12,13 @@ using namespace Challenge;
 
 static constexpr size_t kDefaultIteration = 100000; // number of testing iteration
 static constexpr size_t kDefaultSize = 30;          // size of sync data in thread func
-static constexpr size_t kDefaultNumThreads = 2;        // number of sync threads
+static constexpr size_t kDefaultNumThreads = 2;     // number of sync threads
 
 // A list of supported algorithms
 static constexpr const char* _KAlgorithms[] = {
     "prob",
     "peterson",
     "test_set",
-    "test_set_sleep",
 };
 
 // I usually use boost::program_options but don't want to add additional dependencies// at this time. Those codes were copied from https://stackoverflow.com/questions/865668/parsing-command-line-arguments-in-c
@@ -149,6 +148,10 @@ int main(int argc, char * argv[])
         }
         else if( algorithm == "peterson" ) {
             threads.emplace_back( syncThreadFunc<PetersonSync>, iteration, i * size,
+                    std::ref( testData ), std::ref( failCount ) );
+        }
+        else if( algorithm == "test_set" ) {
+            threads.emplace_back( syncThreadFunc<TestSetSync>, iteration, i * size,
                     std::ref( testData ), std::ref( failCount ) );
         }
         else {

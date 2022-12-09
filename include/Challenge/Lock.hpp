@@ -7,5 +7,6 @@
 #include <Challenge/Lock/StubSync.hpp>
 #include <Challenge/Lock/ProbSync.hpp>
 #include <Challenge/Lock/PetersonSync.hpp>
+#include <Challenge/Lock/TestSetSync.hpp>
 
 #endif // CHLLANGE_LOCK_HPP_

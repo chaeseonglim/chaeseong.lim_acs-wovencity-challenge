@@ -12,7 +12,7 @@ class ProbSyncStore
 public:
     static ProbSyncStore& GetInstance()
     {
-        // Thread safety guranteed since C++11
+        // Thread safety guaranteed since C++11
         static ProbSyncStore inst;
         return inst;
     }
