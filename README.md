@@ -40,7 +40,6 @@ It is a submission for WovenPlanet challange assignment.
 - Mutual Exclusion
 
 The algorithm **doesn't meet mutual exclusion requirements**.
-
 That is, P0 and P1 can be in the critical section at the same time in some cases.
 Here is an example scenario.
 
@@ -59,13 +58,11 @@ Here is an example scenario.
 - Progress
 
 The algorithm **meets progress requirements**.
-
 Any uninterested process won't stop the other processes from entering to the critical section.
 
 - Bounded waiting
 
 The algorithm **doesn't meet bounded waiting requirements**.
-
 It doesn't stop giving turns to the same process even if there are other waiting processes in some cases.
 
 ### Alternative algorithms
