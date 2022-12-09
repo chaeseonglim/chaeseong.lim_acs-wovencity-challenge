@@ -53,9 +53,13 @@ void PetersonSync::enter()
     auto& myFlag = store.getFlag( _id );
     auto& otherFlag = store.getFlag( !_id );
 
+    // Set my flag to signal you want to enter.
     myFlag.store( true );
+
+    // Set turn to other to give them a chance first.
     turn.store( !_id );
 
+    // Wait until you get a chance.
     while( otherFlag.load() && turn.load() != _id ) {
         // no-op
     }
@@ -64,9 +68,10 @@ void PetersonSync::enter()
 void PetersonSync::leave()
 {
     auto& store = PetersonSyncStore::GetInstance();
-    auto& flag = store.getFlag( _id );
+    auto& myFlag = store.getFlag( _id );
 
-    flag.store( false );
+    // Set flag to false when leaving it.
+    myFlag.store( false );
 }
 
 }; // namespace Challenge

@@ -56,12 +56,17 @@ void TestSetSync::enter()
     auto& lock = store.getLock();
     auto& myFlag = store.getFlag( _id );
 
+    // Set my flag to signal that I want to enter.
     myFlag.store( true );
-    bool key = true;
 
+    // Wait until achieving the key (permission) to access with atomic
+    // test_and_set() operation.
+    bool key = true;
     while( myFlag.load() && key ) {
         key = lock.test_and_set();
     }
+
+    // Set my flag to false to indicate that I'm in.
     myFlag.store( false );
 }
 
@@ -71,14 +76,18 @@ void TestSetSync::leave()
     constexpr auto kMaxSlots = TestSetSyncStore::getMaxSlots();
     auto& lock = store.getLock();
 
+    // Find a suitable next ID which wait for their turn.
     size_t nextId = ( _id + 1 ) % kMaxSlots;
     while( ( nextId != _id ) && !store.getFlag( nextId ).load() ) {
         nextId = ( nextId + 1 ) % kMaxSlots;
     }
+
     if( nextId == _id ) {
+        // Clear lock if there's no one waiting.
         lock.clear();
     }
     else {
+        // Set the flag of next ID if there is.
         store.getFlag( nextId ).store( false );
     }
 }
