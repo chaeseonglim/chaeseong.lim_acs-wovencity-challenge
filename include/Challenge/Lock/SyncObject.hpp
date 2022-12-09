@@ -17,6 +17,7 @@ public:
     SyncObject& operator=( SyncObject&& ) = delete; // no move assignment
 
     // CRTP entries
+    // It is intended to provide interface templates without virtual functions.
     void lock() noexcept(false) {
         static_cast<T&>( *this ).enter();
     }
