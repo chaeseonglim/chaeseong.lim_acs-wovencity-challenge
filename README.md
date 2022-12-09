@@ -8,7 +8,7 @@ It is a submission for WovenPlanet challange assignment.
 
 ### Correctness of the given algorithm
 
-#### Pseudocode of the algorithm
+#### Pseudocode
 
 ```
     flag[2]: boolean
@@ -42,6 +42,7 @@ It is a submission for WovenPlanet challange assignment.
 #### Mutual Exclusion
 
 The algorithm **doesn't meet mutual exclusion requirements**.
+
 That is, P0 and P1 can be in the critical section at the same time in some cases.
 Here is an example scenario.
 
@@ -60,31 +61,33 @@ Here is an example scenario.
 #### Progress
 
 The algorithm **meets progress requirements**.
+
 Any uninterested process won't stop the other processes from entering to the critical section.
 
 #### Bounded waiting
 
 The algorithm **doesn't meet bounded waiting requirements**.
+
 It doesn't stop giving turns to the same process even if there are other waiting processes in some cases.
 
 ### Alternative algorithms
 
-Here are alternative algorithms that I have implemented in this submission.
-For real time feature, I have selected the algorithms which meets bounded waiting requirements.
-It would be required to make every processes have reasonable waiting times for their accesses to the critical resource on environments having short processing times and minimum latency requirements.
+I have implemented two well-known concurrent algorithm as alternative solutions in this submission.
+
+I assumed the process would access to the critical section in a very short duration with minimum latency requirements.
+Condidering this, I selected two algorithms which do busy-waiting and bounded waiting characteristics.
 
 #### Peterson algorithm
 
 Peterson algorithm is a famous concurrent programming algorithm for mutual exclusion.
-It looks similar to the given algorithm but is known to meet all 3 requirements; mutual exclusion, progress and bounded waiting for 2 processes.
-Therefore it would be a quick fix to the given algorithm considering similarity between them.
+It looks similar to the given algorithm however it is known to meet all 3 requirements; mutual exclusion, progress and bounded waiting for 2 processes. Therefore it would be a quick fix to the given algorithm considering similarity between them.
 To work on Moden CPUs, some operations need to be atomic due to potential reordering of memory accesses.
 
 Here are more detailed information about Perterson algorithm at [Wiki](https://en.wikipedia.org/wiki/Peterson%27s_algorithm).
 
 #### Bounded-waiting Mutual Exclusion with test_and_set
 
-This algorithm is another well known concurrent programming algorithm.
+This algorithm is another well-known concurrent programming algorithm.
 It also meets 3 requirements; mutual exclusion, progress and bounded waiting and because it supports N processes I took it as another alternative algorithm.
 
 There are many references for this algorithm though I couldn't point the origin of this algorithm.
@@ -113,11 +116,49 @@ do {
 
 ## Implementation
 
-### APIs
+### API
 
+Here's an example code.
 
+```C++
+#include <Challenge/Lock.hpp>
 
-### Prerequisites
+using namespace Challenge;
+
+{
+    // Given algorithm
+    ProdSync sync;
+    {
+        Lock lock( sync );
+
+        // critical section
+    }
+}
+{
+    // Peterson algorithm
+    PetersonSync sync;
+    {
+        Lock lock( sync );
+
+        // critical section
+    }
+}
+{
+    // TestSet algorithm
+    TestSetSync sync;
+    {
+        Lock lock( sync );
+        
+        // critical section
+    }
+}
+```
+
+Please refer to [test_lock.cpp](tests/test_lock.cpp) for more usages.
+
+### How to build
+
+#### Prerequisites
 
 Following dependencies are required.
 
@@ -127,20 +168,20 @@ Following dependencies are required.
 > gtest 1.8.0
 ```
 
-##### Ubuntu
+- Ubuntu
 
 ```bash
 sudo apt-get install build-essential libgtest-dev cmake
 ```
 
-##### M1 Mac OS
+- M1 Mac OS
 
 ```bash
 brew install cmake
 brew install gtest
 ```
 
-### How to build
+#### Build
 
 Run following commands at the top directory of your repo.
 ```bash
@@ -154,57 +195,57 @@ $ make&&make install
 ### How to test
 
 The submission provides a test binary to run tests on various synchronous algorithms.
-Tests run multiple threads with a specific logic to detect failures on mutual exclusion of algorithms.
+The binary runs a specific check logic to detect failures of algorithms running on multiple threads.
 
-#### Test the given algorithm
+#### Given algorithm
 
-#### Ubuntu
+- Ubuntu
 ```bash
 $ LD_LIBRARY_PATH={install path}/lib {install path}/bin/test_lock -a prob
 ```
 
-#### M1 Mac OS
+- M1 Mac OS
 ```bash
 $ DYLD_LIBRARY_PATH={install path}/lib {install path}/bin/test_lock -a prob
 ```
 
-#### Expected result
+- Expected result
 ```bash
 algorithm: prob, iteration: 100000, size: 30, threads: 2
 Tests failed ##### time
 ```
 
-#### Test Peterson algorithm
+#### Peterson algorithm
 
-#### Ubuntu
+- Ubuntu
 ```bash
 $ LD_LIBRARY_PATH={install path}/lib {install path}/bin/test_lock -a peterson
 ```
 
-#### M1 Mac OS
+- M1 Mac OS
 ```bash
 $ DYLD_LIBRARY_PATH={install path}/lib {install path}/bin/test_lock -a peterson
 ```
 
-#### Expected result
+- Expected result
 ```bash
 algorithm: peterson, iteration: 100000, size: 30, threads: 2
 Tests passed successfully.
 ```
 
-#### Test the bounded waiting test_set algorithm
+#### Bounded waiting test_set algorithm
 
-#### Ubuntu
+- Ubuntu
 ```bash
 $ LD_LIBRARY_PATH={install path}/lib {install path}/bin/test_lock -a test_set -t 10
 ```
 
-#### M1 Mac OS
+- M1 Mac OS
 ```bash
 $ DYLD_LIBRARY_PATH={install path}/lib {install path}/bin/test_lock -a test_set -t 10
 ```
 
-#### Expected result
+- Expected result
 ```bash
 algorithm: test_set, iteration: 100000, size: 30, threads: 10
 Tests passed successfully.
