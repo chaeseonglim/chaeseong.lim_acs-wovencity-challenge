@@ -14,5 +14,5 @@ gtest_discover_tests( gtest_Lock
 
 # Build the test binary
 add_executable(test_lock test_lock.cpp)
-target_link_libraries(test_lock PRIVATE Challenge::Lock)
+target_link_libraries(test_lock PRIVATE Challenge::Lock pthread)
 install(TARGETS test_lock DESTINATION bin)
