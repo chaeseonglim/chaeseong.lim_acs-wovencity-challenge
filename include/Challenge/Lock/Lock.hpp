@@ -27,7 +27,7 @@ template <typename T>
 constexpr bool is_syncable = ( detect<T, enter_t>{} ) && ( detect<T, leave_t>{} );
 
 // The class which provides API to access their critical sections exclusively.
-// It utilize RAII pattern to do lock&unlock the associated sync object.
+// It utilizes RAII pattern to do lock and unlock the associated sync object.
 template <typename T>
 class Lock final
 {

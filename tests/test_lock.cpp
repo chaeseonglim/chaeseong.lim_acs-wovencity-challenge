@@ -107,7 +107,8 @@ int main(int argc, char * argv[])
     else {
         algorithm = str;
         if( !isValidAlgorithm( algorithm ) ) {
-            std::cerr << "Wrong algorithm name: " << algorithm << std::endl;
+            std::cerr << "ERROR! " << "Wrong algorithm name: " << algorithm <<
+                std::endl;
             return -1;
         }
     }
@@ -131,7 +132,7 @@ int main(int argc, char * argv[])
         ", size: " << size << ", threads: " << numThreads << std::endl;
 
     if( iteration == 0 || size == 0 || numThreads == 0) {
-        usage();
+        std::cerr << "ERROR! " << "Some option values are zero." << std::endl;
         return -1;
     }
 
@@ -153,7 +154,8 @@ int main(int argc, char * argv[])
         else {
             // It's unlikely to happen as the variable was already validated
             // at the above code.
-            std::cerr << "Unknown algorithm: " << algorithm << std::endl;
+            std::cerr << "ERROR! " << "Unknown algorithm: " << algorithm <<
+                std::endl;
             return -1;
         }
     }
