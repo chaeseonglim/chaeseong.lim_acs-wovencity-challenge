@@ -1,19 +1,19 @@
 #include <atomic>
 #include <stdexcept>
-#include <Challenge/Lock/ProbSync.hpp>
+#include <Challenge/Lock/PetersonSync.hpp>
 
 namespace Challenge {
 
-// A singleton class that contains the global variables for ProbSync.
+// A singleton class that contains the global variables for PetersonSync.
 // DISCLAIMER: I decided to use singleton pattern though not a big fan of it because
 // I wanted to keep APIs and the code rather simple in this challange.
-class ProbSyncStore
+class PetersonSyncStore
 {
 public:
-    static ProbSyncStore& GetInstance()
+    static PetersonSyncStore& GetInstance()
     {
         // Thread safety guranteed since C++11
-        static ProbSyncStore inst;
+        static PetersonSyncStore inst;
         return inst;
     }
 
@@ -42,30 +42,30 @@ private:
     std::atomic<size_t> _nextFlagIdx{}; // to assign flag slots automatically
 };
 
-ProbSync::ProbSync()
-    : _id( ProbSyncStore::GetInstance().assignSlot() )
+PetersonSync::PetersonSync()
+    : _id( PetersonSyncStore::GetInstance().assignSlot() )
 {}
 
-void ProbSync::enter()
+void PetersonSync::enter()
 {
-    // It is the algorithm in the problem statement.
-    // Its logic is flawed and would fail to pass the functional test.
+    // It is the Perterson algorithm with atomocity support.
 
-    auto& store = ProbSyncStore::GetInstance();
+    auto& store = PetersonSyncStore::GetInstance();
     auto& turn = store.getTurn();
-    auto& flag = store.getFlag( _id );
+    auto& myFlag = store.getFlag( _id );
+    auto& otherFlag = store.getFlag( !_id );
 
-    while( turn.load() != _id ) {
-        while( flag.load() ) {
-            // no-op
-        }
-        turn.store( _id );
+    myFlag.store( true );
+    turn.store( !_id );
+
+    while( otherFlag.load() && turn.load() != _id ) {
+        // no-op
     }
 }
 
-void ProbSync::leave()
+void PetersonSync::leave()
 {
-    auto& store = ProbSyncStore::GetInstance();
+    auto& store = PetersonSyncStore::GetInstance();
     auto& flag = store.getFlag( _id );
 
     flag.store( false );

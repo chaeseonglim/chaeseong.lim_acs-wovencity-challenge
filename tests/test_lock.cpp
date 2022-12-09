@@ -59,7 +59,7 @@ void syncThreadFunc( size_t maxIteration, uint16_t offset,
     }
     catch( const std::exception& e ) {
         failCount.fetch_add( 1, std::memory_order_relaxed );
-        std::cerr << e.what() << std::endl;
+        std::cerr << "Exception: " << e.what() << std::endl;
     }
 }
 
@@ -145,6 +145,16 @@ int main(int argc, char * argv[])
         if( algorithm == "prob" ) {
             threads.emplace_back( syncThreadFunc<ProbSync>, iteration, i * size,
                     std::ref( testData ), std::ref( failCount ) );
+        }
+        else if( algorithm == "peterson" ) {
+            threads.emplace_back( syncThreadFunc<PetersonSync>, iteration, i * size,
+                    std::ref( testData ), std::ref( failCount ) );
+        }
+        else {
+            // It's unlikely to happen as the variable was already validated
+            // at the above code.
+            std::cerr << "Unknown algorithm: " << algorithm << std::endl;
+            return -1;
         }
     }
 

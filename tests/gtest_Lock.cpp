@@ -18,7 +18,7 @@ TEST( Lock, SANITY_Lock )
     auto syncThreadFunc =
         [&failCount, &testData] ( size_t maxIteration, uint16_t offset ) {
         try {
-            ProbSync syncObj;
+            PetersonSync syncObj;
             for( size_t iteration = 0; iteration < kMaxIteration; ++iteration ) {
                 Lock lock( syncObj );
                 for( size_t i = 0; i < testData.size(); ++i ) {

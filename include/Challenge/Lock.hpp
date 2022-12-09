@@ -6,5 +6,6 @@
 #include <Challenge/Lock/SyncObject.hpp>
 #include <Challenge/Lock/StubSync.hpp>
 #include <Challenge/Lock/ProbSync.hpp>
+#include <Challenge/Lock/PetersonSync.hpp>
 
 #endif // CHLLANGE_LOCK_HPP_

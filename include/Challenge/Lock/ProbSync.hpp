@@ -16,7 +16,7 @@ public:
     void leave();
 
 private:
-    size_t _id;
+    size_t _id; // A slot idx taken by this sync object
 };
 
 }; // namespace Challenge
