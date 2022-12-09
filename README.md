@@ -2,7 +2,7 @@
 
 ## Introduction
 
-It is an submission for WovenPlanet challange assignment.
+It is a submission for WovenPlanet challange assignment.
 
 ## Analysis
 
