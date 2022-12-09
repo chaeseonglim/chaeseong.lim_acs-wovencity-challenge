@@ -1,14 +1,12 @@
 # Assignment Submission
 
-## Introduction
-
 It is a submission for WovenPlanet challange assignment.
 
 ## Analysis
 
 ### Correctness of the given algorithm
 
-#### Pseudocode
+#### Pseudo code
 
 ```
     flag[2]: boolean
@@ -39,7 +37,7 @@ It is a submission for WovenPlanet challange assignment.
     flag[1] := False
 ```
 
-#### Mutual Exclusion
+- Mutual Exclusion
 
 The algorithm **doesn't meet mutual exclusion requirements**.
 
@@ -58,13 +56,13 @@ Here is an example scenario.
 |&nbsp;&nbsp;&nbsp;&nbsp;turn:=0| |flag: { True, True }, turn: 0|
 |**// P0 is in the critical section**|**// P1 is in the critical section**| |
 
-#### Progress
+- Progress
 
 The algorithm **meets progress requirements**.
 
 Any uninterested process won't stop the other processes from entering to the critical section.
 
-#### Bounded waiting
+- Bounded waiting
 
 The algorithm **doesn't meet bounded waiting requirements**.
 
@@ -75,7 +73,9 @@ It doesn't stop giving turns to the same process even if there are other waiting
 I have implemented two well-known concurrent algorithm as alternative solutions in this submission.
 
 I assumed the process would access to the critical section in a very short duration with minimum latency requirements.
-Condidering this, I selected two algorithms which do busy-waiting and bounded waiting characteristics.
+Condidering this, I selected two algorithms which do busy-waiting and have bounded waiting characteristics.
+
+In this submissions I didn't go deep into the memory order while implementing them because of complexity and hard-to-proof nature of the memory order. Indeed I would stick to sequential consistency unless I have a strong proof that it's a bottleneck of performance.
 
 #### Peterson algorithm
 
@@ -90,7 +90,7 @@ Here are more detailed information about Perterson algorithm at [Wiki](https://e
 This algorithm is another well-known concurrent programming algorithm.
 It also meets 3 requirements; mutual exclusion, progress and bounded waiting and because it supports N processes I took it as another alternative algorithm.
 
-There are many references for this algorithm though I couldn't point the origin of this algorithm.
+There are many references for this algorithm though I couldn't find the origin of this algorithm.
 Here is a pseudo code for this algorithm. ([source](https://stackoverflow.com/questions/31084724/bounded-waiting-mutual-exclusion-with-test-and-set) page)
 ```
 do {
@@ -124,6 +124,8 @@ Here's an example code.
 #include <Challenge/Lock.hpp>
 
 using namespace Challenge;
+
+// ...
 
 {
     // Given algorithm
@@ -204,7 +206,7 @@ The binary runs a specific check logic to detect failures of algorithms running 
 $ LD_LIBRARY_PATH={install path}/lib {install path}/bin/test_lock -a prob
 ```
 
-- M1 Mac OS
+- Mac OS
 ```bash
 $ DYLD_LIBRARY_PATH={install path}/lib {install path}/bin/test_lock -a prob
 ```
@@ -222,7 +224,7 @@ Tests failed ##### time
 $ LD_LIBRARY_PATH={install path}/lib {install path}/bin/test_lock -a peterson
 ```
 
-- M1 Mac OS
+- Mac OS
 ```bash
 $ DYLD_LIBRARY_PATH={install path}/lib {install path}/bin/test_lock -a peterson
 ```
@@ -240,7 +242,7 @@ Tests passed successfully.
 $ LD_LIBRARY_PATH={install path}/lib {install path}/bin/test_lock -a test_set -t 10
 ```
 
-- M1 Mac OS
+- Mac OS
 ```bash
 $ DYLD_LIBRARY_PATH={install path}/lib {install path}/bin/test_lock -a test_set -t 10
 ```
@@ -251,4 +253,3 @@ algorithm: test_set, iteration: 100000, size: 30, threads: 10
 Tests passed successfully.
 ```
 
-## Conclusions
