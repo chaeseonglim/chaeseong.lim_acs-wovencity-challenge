@@ -6,13 +6,11 @@
 namespace Challenge {
 
 // A class that has a stub implementation of SyncObject
-class StubSync final : public SyncObject
+class StubSync final : public SyncObject<StubSync>
 {
 public:
-    StubSync() = default;
-
-    void lock() { /* stub */ }
-    void unlock() { /* stub */ }
+    void enter() { /* stub */ }
+    void leave() { /* stub */ }
 };
 
 }; // namespace Challenge

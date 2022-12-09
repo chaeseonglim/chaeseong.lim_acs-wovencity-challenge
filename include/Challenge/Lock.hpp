@@ -5,5 +5,6 @@
 #include <Challenge/Lock/Lock.hpp>
 #include <Challenge/Lock/SyncObject.hpp>
 #include <Challenge/Lock/StubSync.hpp>
+#include <Challenge/Lock/ProbSync.hpp>
 
 #endif // CHLLANGE_LOCK_HPP_

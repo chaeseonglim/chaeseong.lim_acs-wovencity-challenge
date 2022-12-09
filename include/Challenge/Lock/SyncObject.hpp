@@ -3,17 +3,27 @@
 
 namespace Challenge {
 
-// A base class that implement syncObjects for concurrent programming.
-// Inherited classes will be used along with Lock.
+// A CRTP class that defines the methods for concurrent programming.
+// Inherited classes need to associate with Lock.
+template<typename T>
 class SyncObject
 {
+public:
+    SyncObject( const SyncObject& ) = delete; // no copy constructor
+    ~SyncObject() = default; // no virtual keyword
+
+    SyncObject& operator=( const SyncObject& ) = delete; // no copy assignment
+
+    // CRTP entries
+    void lock() noexcept(false) {
+        static_cast<T&>( *this ).enter();
+    }
+    void unlock() noexcept(false) {
+        static_cast<T&>( *this ).leave();
+    }
+
 protected:
     SyncObject() = default; // hide the default constructor
-
-private:
-    // Inherited classes are required to implement below two methods.
-    // void lock();
-    // void unlock();
 };
 
 }; // namespace Challenge
