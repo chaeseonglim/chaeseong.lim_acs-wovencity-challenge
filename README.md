@@ -149,7 +149,7 @@ using namespace Challenge;
     }
 }
 {
-    // TestSet algorithm
+    // Bounded waiting test-set algorithm
     TestSetSync sync;
     {
         Lock lock( sync );
