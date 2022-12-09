@@ -6,6 +6,8 @@ It is a submission for WovenPlanet challange assignment.
 
 ### Correctness of the given algorithm
 
+Conclusion: This algorithm has a serious flaw in its logic and shouldn't be used as a concurrent programming algorithm.
+
 #### Pseudo code
 
 ```
