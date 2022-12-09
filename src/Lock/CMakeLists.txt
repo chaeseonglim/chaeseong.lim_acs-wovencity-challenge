@@ -1,7 +1,5 @@
 set(CMAKE_CXX_STANDARD 17)
 
-add_library(Lock SHARED)
-
 set(SRCS
     ProbSync.cpp
     )
@@ -14,10 +12,7 @@ set(HEADERS_PUB
     ${HEADERS_DIR}/Lock.hpp
     )
 
-target_sources(Lock PUBLIC
-    PUBLIC  ${HEADERS_PUB}
-    PRIVATE ${SRCS}
-    )
+add_library(Lock SHARED ${SRCS} ${HEADERS_PUB} )
 
 target_include_directories(Lock
     PUBLIC  ${PROJECT_SOURCE_DIR}/include
@@ -27,21 +22,6 @@ target_include_directories(Lock
 target_compile_options(Lock
     PRIVATE -O2
     )
-
-#target_link_libraries(Lock
-#    PUBLIC ${OpenCV_LIBS}
-#           ${CVC_LIBRARIES}
-#           ${HOGL_LIBRARIES}
-#           ${SSHASH_LIBRARIES}
-#           Boost::headers
-#           Boost::filesystem
-#           Boost::thread
-#           Boost::random
-#           cvc-common
-#           cvc-math
-#           cvc-cv
-#           QRideDL  # from libadas
-#    )
 
 install(TARGETS Lock DESTINATION lib)
 install(FILES ${HEADERS_PUB} DESTINATION include/Lock)
