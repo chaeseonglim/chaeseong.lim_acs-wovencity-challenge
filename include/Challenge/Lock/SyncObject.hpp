@@ -10,9 +10,11 @@ class SyncObject
 {
 public:
     SyncObject( const SyncObject& ) = delete; // no copy constructor
+    SyncObject( SyncObject&& ) = delete; // no move constructor
     ~SyncObject() = default; // no virtual keyword
 
     SyncObject& operator=( const SyncObject& ) = delete; // no copy assignment
+    SyncObject& operator=( SyncObject&& ) = delete; // no move assignment
 
     // CRTP entries
     void lock() noexcept(false) {
