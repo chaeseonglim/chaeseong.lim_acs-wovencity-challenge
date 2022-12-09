@@ -51,8 +51,7 @@ void ProbSync::enter()
     auto& turn = store.getTurn();
     auto& flag = store.getFlag( _id );
 
-    while( turn.load() != _id )
-    {
+    while( turn.load() != _id ) {
         while( flag.load() ) {
             // no-op
         }
