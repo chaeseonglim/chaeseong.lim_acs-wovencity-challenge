@@ -181,7 +181,7 @@ Following dependencies are required.
 sudo apt-get install build-essential libgtest-dev cmake
 ```
 
-- M1 Mac OS
+- Mac OS
 
 ```bash
 brew install cmake
