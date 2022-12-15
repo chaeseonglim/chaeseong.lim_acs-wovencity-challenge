@@ -18,10 +18,10 @@ public:
 
     // CRTP entries
     // It is intended to provide interface templates without virtual functions.
-    void lock() noexcept(false) {
+    void lock() noexcept(true) {
         static_cast<T&>( *this ).enter();
     }
-    void unlock() noexcept(false) {
+    void unlock() noexcept(true) {
         static_cast<T&>( *this ).leave();
     }
 
